@@ -6,10 +6,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Extentions will Help
 [Auto Close Tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-close-tag)
+
 [Auto Rename Tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag)
+
 [indent-rainbow](https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow)
+
 [Prettier Now](https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow)
+
 [Live Sass Compiler](https://marketplace.visualstudio.com/items?itemName=remimarsal.prettier-now)
+
 [Bracket Pair Colorizer](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer)
 
 [SCSS Formatter](https://marketplace.visualstudio.com/items?itemName=sibiraj-s.vscode-scss-formatter)
@@ -17,19 +22,21 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 this will compile the sass files to scc file 
 to override the destination  
 
-Go to Settings Or [Ctr+,]
-Search for "sass"
-Oppen Setting.json file and add this 
+1. Go to Settings Or [Ctr+,]
+2. Search for "sass"
+3. Oppen Setting.json file and add this 
 
- liveSassCompile.settings.formats":[
+```
+"liveSassCompile.settings.formats":[
         {
             "format": "compressed",
             "extensionName": ".css",
             "savePath": "./src/assets/css"
         }
     ],
+```
 
-Save and close the file
+4. Save and close the file
 
 
 [ES7+ React/Redux/React-Native snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)

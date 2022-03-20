@@ -1,0 +1,20 @@
+/* ====================== UTILLITIES ====================== */
+.bg-light-pink {
+    background-color: color("bg-nav");
+    color: black ;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.section-subtitle {
+    display: block;
+    font-size: 0.813rem;
+    margin-bottom: 0 0 3 0;
+}
+
+.flex-auto {
+    flex: auto;
+}

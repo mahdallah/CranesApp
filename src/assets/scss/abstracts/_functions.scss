@@ -1,0 +1,8 @@
+/* ====================== FUNCTIONS ====================== */
+@function color($color-name) {
+    @return map-get($colors, $color-name);
+}
+@function rem($value) {
+    $remValue: ($value / 16) + rem;
+    @return $remValue;
+}

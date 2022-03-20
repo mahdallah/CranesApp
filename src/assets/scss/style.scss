@@ -1,0 +1,18 @@
+@import 'abstracts/functions';
+@import 'abstracts/colors';
+@import 'abstracts/globals';
+@import 'abstracts/utilities';
+
+@import 'components/buttons';
+
+// 
+@import 'parts/sidebar';
+@import 'parts/footer';
+
+// 
+@import 'pages/home';
+@import 'pages/customers';
+@import 'pages/create_customer';
+@import 'pages/login';
+@import 'pages/register';
+@import 'pages/profile';

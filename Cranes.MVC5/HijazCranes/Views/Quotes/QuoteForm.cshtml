@@ -1,0 +1,152 @@
+﻿@model HijazCranes.ViewModels.QuoteViewModel
+@{
+    if (Model.Quote == null)
+    {
+        ViewBag.Title = "Create";
+    }
+    else
+    {
+        ViewBag.Title = "Edit";
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Quotation Form</h2>
+<form>
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @*Quote*@
+        <div class="row">
+            <!-- Employee  -->
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Employee, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.TextBoxFor(c => c.Employee.FirstName, new { @class = "form-control", @readOnly = "readonly" })
+                @Html.HiddenFor(e => e.Employee.Id)
+                @Html.ValidationMessageFor(model => model.Employee, "", new { @class = "text-danger" })
+            </div>
+            <!-- Customers  -->
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.Quote.Customer, htmlAttributes: new { @class = "control-label  col-md-2" })
+                @Html.DropDownListFor(c => c.Quote.Customer_Id, new SelectList(Model.Customers, "Id", "FirstName"), "Select Cusotmer", htmlAttributes: new { @class = "form-select customers" })
+                @Html.ValidationMessageFor(model => model.Quote.Customer, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*QuoteCranes*@
+        <table class="table table-bordered">
+            <tr class="table-info">
+                <th>Cranes</th>
+                <th>Hire type</th>
+                <th>Hours</th>
+                <th>Items</th>
+                <th>Sub-total</th>
+                <th></th>
+                <th hidden></th>
+            </tr>
+            <tr>
+                <!-- Cranes  -->
+                <td>
+                    @Html.DropDownListFor(c => c.Cranes, new SelectList(Model.Cranes, "Id", "Name"), "Select Crane", htmlAttributes: new { @class = "form-select cranes" })
+                    @Html.ValidationMessageFor(model => model.Cranes, "", new { @class = "text-danger" })
+                </td>
+                <!-- Radio Buttons -->
+                <td>
+                    <div class="form-check" id="div-for-Hours">
+                        <input class="form-check-input calc" type="radio" name="is-for-hours-items" value="hours" id="is-for-hours">
+                        <label class="form-check-label" for="is-for-hours">
+                            In Hours
+                        </label>
+                    </div>
+                    <div class="form-check" id="div-for-items">
+                        <input class="form-check-input calc" type="radio" name="is-for-hours-items" value="items" id="is-for-items">
+                        <label class="form-check-label" for="is-for-items">
+                            Items
+                        </label>
+                    </div>
+                    @Html.ValidationMessage("is-for-hours-items", htmlAttributes: new { @class = "text-danger" })
+                </td>
+                <!-- Hired Hours -->
+                <td>
+
+                    @Html.TextBoxFor(model => model.QuoteCrane.HiredHours, new { @class = "form-control hired", Type = "number" })
+                    @Html.ValidationMessageFor(model => model.QuoteCrane.HiredHours, "", new { @class = "text-danger" })
+
+                </td>
+                <!-- Hired Items -->
+                <td>
+                    @Html.TextBoxFor(model => model.QuoteCrane.HiredItems, new { @class = "form-control hired", Type = "number" })
+                    @Html.ValidationMessageFor(model => model.QuoteCrane.HiredItems, "", new { @class = "text-danger" })
+                </td>
+                <!-- Price -->
+                <td>
+                    @Html.TextBoxFor(c => c.QuoteCrane.Price, new { @class = "form-control", @readOnly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.QuoteCrane.Price, "", new { @class = "text-danger" })
+                </td>
+                @*Id*@
+                <td hidden>
+                    <input type="text" id="quoatecrane-id" hidden value="" />
+                </td>
+                @*Add Button*@
+                <td>
+                    <button type="button" id="add-btn" class="btn btn-outline-info"><i class="fa fa-plus"></i> Add</button>
+                </td>
+            </tr>
+        </table>
+
+        @*Quate Cranes Table*@
+        <div>
+            <table class="table table-hover my-2 py-2" id="quotecranes-tbl">
+                <thead>
+                    <tr>
+                        <th hidden>Id</th>
+                        <th>Crane</th>
+                        <th>Hours</th>
+                        <th>Items</th>
+                        <th>Sub-Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="quotecranes-tbody">
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="row">
+                <!-- Dicount -->
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.Quote.Discount, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.TextBoxFor(model => model.Quote.Discount, new { @class = "form-control", Type = "number" })
+                    @Html.ValidationMessageFor(model => model.Quote.Discount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <!-- Total -->
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.Quote.Total, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.TextBoxFor(model => model.Quote.Total, new { @class = "form-control", @readOnly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.Quote.Total, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <!-- button -->
+            <div class="py-3 align-items offset-md-10">
+                <button id="submit-btn" name="submit-btn" class="btn btn-primary" type="button">Save</button>
+            </div>
+        </div>
+        <!-- Id -->
+        @if (Model.Quote == null)
+        {
+            <input data-val="true" data-val-number="The field Id must be a number." data-val-required="The Id field is required."
+                   id="Quote_Id" name="Id" type="hidden" value="0">
+        }
+        else
+        {
+            @Html.HiddenFor(q => q.Quote.Id)
+        }
+    </div>
+</form>
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/quote.form.js"></script>
+} 

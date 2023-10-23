@@ -1,0 +1,102 @@
+﻿@model HijazCranes.Models.Crane
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title Crane</h2>
+
+@using (Html.BeginForm("Save", "Cranes", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Crane</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="Name" name="Crane.Name" type="text" value="">
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaxWeightLiftInTon, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control text-box single-line"
+                       data-val="true" data-val-number="The field Maximum Wieght Can Lift (Ton) must be a number." data-val-range="The field Maximum Wieght Can Lift (Ton) must be between 4 and 30." data-val-range-max="30" data-val-range-min="4" data-val-required="The Maximum Wieght Can Lift (Ton) field is required."
+                       id="MaxWeightLiftInTon" name="Crane.MaxWeightLiftInTon" type="number" value="">
+                @Html.ValidationMessageFor(model => model.MaxWeightLiftInTon, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PricePerHour, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" data-val="true" data-val-number="The field Price Per Hour must be a number." data-val-required="The Price Per Hour field is required."
+                       id="PricePerHour" name="Crane.PricePerHour" type="number" value="">
+                @Html.ValidationMessageFor(model => model.PricePerHour, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PricePerItem, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" data-val="true" data-val-number="The field Price Per Item must be a number." data-val-required="The Price Per Item field is required."
+                       id="PricePerItem" name="Crane.PricePerItem" type="number" value="">
+                @Html.ValidationMessageFor(model => model.PricePerItem, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Plate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" id="Plate" name="Crane.Plate" type="text" value="">
+                @Html.ValidationMessageFor(model => model.Plate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImageFile, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="ImageFile" name="Crane.ImageFile" type="file" onchange="loadFile(event)">
+                @Html.ValidationMessageFor(model => model.ImageFile, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <img id="output" class="img-thumbnail" style="height: 250px; width: 250px;" />
+            </div>
+        </div>
+
+        <input data-val="true" id="Crane_Id" name="Crane.Id" type="hidden" value="0">
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section scripts {
+    <script>
+        var loadFile = function (event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function () {
+                URL.revokeObjectURL(output.src) // free memory
+            }
+        };
+    </script>
+}

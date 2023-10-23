@@ -1,0 +1,33 @@
+﻿@model IEnumerable<HijazCranes.Models.Crane>
+
+@{
+    ViewBag.Title = "Cranes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cranes</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="row row-cols-1 row-cols-lg-4 g-4">
+    @foreach (var item in Model)
+    {
+        <div class="col">
+            <div class="card">
+                <img class="card-img-top rounded" src="@Url.Content(item.Image)" alt="@Html.DisplayFor(modelItem => item.Name)">
+                <div class="card-body">
+                    <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name) </h5>
+                    @*<p class="card-text"></p>*@
+                <p class="card-text">Lifts @Html.DisplayFor(modelItem => item.MaxWeightLiftInTon) Ton <br /> @Html.DisplayFor(modelItem => item.PricePerHour) $ per Four hours <br /> @Html.DisplayFor(modelItem => item.PricePerItem) $ per Item</p>
+                    @Html.ActionLink("Hire", "Quotes", new { id = item.Id }, new { @class = "btn btn-primary" })
+                    <div class="my-2">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success"}) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-secondary" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

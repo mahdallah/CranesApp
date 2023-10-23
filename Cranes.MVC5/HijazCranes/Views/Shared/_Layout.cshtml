@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+    <title>@ViewBag.Title - Hijaz Cranes</title>
+    @Styles.Render("~/Content/css")
+    @*// local*@
+    <link href="~/Content/plugins/adminlte.min.css" rel="stylesheet" />
+    <link href="~/Content/plugins/overlayScrollbars/css/OverlayScrollbars.min.css" />
+    @*// custom*@
+    <link href="~/Content/site.css" />
+    @RenderSection("css", required: false)
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    @Html.Partial("_Navbar")
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        @Html.Partial("_Footer")
+    </div>
+    @Scripts.Render("~/bundles/js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,89 @@
+﻿@model HijazCranes.ViewModels.QuoteViewModel
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Quote</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayFor(model => model.Quote.Customer.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quote.Customer.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quote.Employee.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quote.Employee.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quote.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quote.Created)
+        </dd>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Cranes</th>
+                    <th>Hired Hours</th>
+                    <th>Hired Items</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.QuoteCranes)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(c => item.Crane.Name)
+                        </td>
+                        <td>@Html.DisplayFor(c => item.HiredHours) </td>
+                        <td>@Html.DisplayFor(c => item.HiredItems)</td>
+                        <td>@Html.DisplayFor(c => item.Price)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <dt>
+            @Html.DisplayNameFor(model => model.Quote.Discount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quote.Discount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quote.Total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quote.Total)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

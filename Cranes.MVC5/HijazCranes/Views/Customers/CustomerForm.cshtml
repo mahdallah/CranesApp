@@ -1,0 +1,97 @@
+﻿@model HijazCranes.ViewModels.CustomerFormViewModel
+@{
+    if (Model.Customer != null)
+    {
+        ViewBag.Title = "Edit";
+    }
+    else
+    {
+        ViewBag.Title = "Create";
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@ViewBag.Title Customer</h2>
+<form class="row">
+    @*@Html.AntiForgeryToken()*@
+
+    <div class="form-group col-md-6">
+        @*Name Input*@
+        @Html.LabelFor(c => c.Customer.FirstName)
+        @Html.TextBoxFor(c => c.Customer.FirstName, new { @class = "form-control" })
+    </div>
+    <div class="form-group col-md-6">
+        @*Name Input*@
+        @Html.LabelFor(c => c.Customer.LastName)
+        @Html.TextBoxFor(c => c.Customer.LastName, new { @class = "form-control" })
+    </div>
+
+    @*Customer Contacts*@
+    <table class="col-12 table table-hover table-bordered">
+        <tr>
+            <th>Custmoer Contact </th>
+            <th>Default Contact</th>
+            <th>Contact Type</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                @*Customer Contact Input*@
+                <input class="form-control" type="tel" name="MobileNumber" id="contact-input" />
+            </td>
+            <td>
+                @Html.CheckBoxFor(c => c.CustomerContact.Default) Is Default
+                <input type="hidden" id="contact-id" value="0" />
+            </td>
+            <td>
+                @*Customer Contact Type Drop Down List*@
+                <select class="form-control" id="customer-contact-contact-type">
+                    <option value="3" selected>Select Contact Type</option>
+                    <option value="0">Mobile Number</option>
+                    <option value="1">Land Line</option>
+                </select>
+            </td>
+            <td>
+                @*Add Button*@
+                <button type="button" id="add-contact-btn" class="btn btn-outline-info"><i class="fa fa-plus"></i> Add</button>
+            </td>
+        </tr>
+    </table>
+    <div>
+        @*Customer Contacts Table*@
+        <table class="table table-hover my-2 py-2" id="customer-contacts-tbl">
+            <thead>
+                <tr>
+                    <th>Contact</th>
+                    <th>Contact Type</th>
+                    <th>Is Default</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="customer-contact-body">
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        @*Save Button*@
+        <div class="col-md-12 text-right py-4">
+            <button type="submit" class=" btn btn-primary" id="submit-btn">Save</button>
+        </div>
+    </div>
+    <div class="row">
+        @*Customer Id Input*@
+        @if (Model.Customer != null)
+        {
+            @Html.HiddenFor(c => c.Customer.Id)
+        }
+        else
+        {
+            <input data-val="true" id="Customer_Id" name="Customer.Id" type="hidden" value="0">
+        }
+    </div>
+</form>
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/CustomerForm.js")"></script>
+}

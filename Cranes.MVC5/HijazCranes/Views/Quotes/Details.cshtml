@@ -1,0 +1,44 @@
+﻿@model HijazCranes.ViewModels.QuoteViewModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Employee</th>
+            <th>Customer</th>
+            <th>Date</th>
+            <th>Cranes</th>
+            <th>Discount</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(c => c.Quote.Employee.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(c => c.Quote.Customer.FirstName)
+            </td>
+            <td>
+                @Model.Quote.Created.Value.ToString("MMM dd yyyy")
+            </td>
+            <td>
+                @foreach (var item in Model.QuoteCranes)
+                {
+                    @Html.DisplayFor(c => item.Crane.Name) <br />
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(c => c.Quote.Discount)
+            </td>
+            <td>
+                @Html.DisplayFor(c => c.Quote.Total)
+            </td>
+        </tr>
+    </tbody>
+</table>
